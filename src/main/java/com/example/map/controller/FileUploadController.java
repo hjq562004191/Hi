@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -112,7 +111,7 @@ public class FileUploadController {
      * @throws JsonProcessingException
      */
     @RequestMapping(value = "/uploadVideo/{pointId}", method = POST)
-    public ResultModel VideoUpload(@PathVariable int pointId, @RequestParam("type") int type,
+    public ResultModel VideoUpload(@PathVariable int pointId,
                                   @RequestParam("file") MultipartFile file,
                                   @RequestParam(required = true) String title,
                                   HttpServletRequest request) throws JsonProcessingException {
@@ -152,11 +151,8 @@ public class FileUploadController {
             return ResultBuilder.getFailure(2, "文件上传出错");
         }
         VideoMessage videoMessage = new VideoMessage();
-        if (type == VIDEO) {
-            videoMessage.setTitle(title);
-        } else {
-            videoMessage.setTitle(null);
-        }
+
+        videoMessage.setTitle(title);
         videoMessage.setUrl(path);
         ObjectMapper objectMapper = new ObjectMapper();
         String content;
