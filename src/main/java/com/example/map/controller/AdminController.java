@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
- * @author: mengchen
+ * @author: Qiang
  * Create by 18-4-11
  */
 @RestController
@@ -28,7 +28,6 @@ public class AdminController {
         if (result.hasErrors()) {
             return ErroUtils.handlerReutrnError(result);
         }
-
         return adminService.register(admin);
     }
 
@@ -37,7 +36,6 @@ public class AdminController {
         if (result.hasErrors()) {
             return ErroUtils.handlerReutrnError(result);
         }
-
         return adminService.login(admin);
     }
 

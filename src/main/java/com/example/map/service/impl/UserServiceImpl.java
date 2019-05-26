@@ -96,6 +96,7 @@ public class UserServiceImpl implements UserService {
         return ResultBuilder.getSuccess(user);
     }
 
+
     @Override
     public User findUserById(int userId) {
         return userMapper.findUserById(userId);

@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
-import static org.apache.ibatis.mapping.FetchType.EAGER;
 
 /**
  * @author Qiang
@@ -25,10 +24,7 @@ public interface InformationMapper {
             @Result(id = true, column = "id", property = "id"),
             @Result(column = "point_Id", property = "pointId"),
             @Result(column = "type", property = "type"),
-            @Result(column = "audio_second", property = "audioSecond"),
-            @Result(column = "audio_minutes", property = "audioMinutes"),
-            @Result(column = "user_id", property = "username",
-                    one = @One(select = "com.map.mapper.UserMapper.findUsernameById", fetchType = EAGER)),
+            @Result(column = "user_id", property = "userId"),
             @Result(column = "remark_count", property = "remarkCount"),
             @Result(column = "click_count", property = "clickCount"),
             @Result(column = "create_at", property = "createAt")
@@ -43,8 +39,6 @@ public interface InformationMapper {
             @Result(column = "point_Id", property = "pointId"),
             @Result(column = "type", property = "type"),
             @Result(column = "user_id", property = "userId"),
-            @Result(column = "audio_second", property = "audioSecond"),
-            @Result(column = "audio_minutes", property = "audioMinutes"),
             @Result(column = "remark_count", property = "remarkCount"),
             @Result(column = "click_count", property = "clickCount"),
             @Result(column = "create_at", property = "createAt"),

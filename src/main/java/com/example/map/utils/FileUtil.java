@@ -11,11 +11,11 @@ import java.util.Random;
  */
 public class FileUtil {
 
-    public static final String WINDOWS_PATH = "E:\\Tomcat\\fileUpload";
+    private static final String WINDOWS_PATH = "E:\\Tomcat\\fileUpload";
 
-    public static final String LINUX_PATH = "/home/upload";
+    private static final String LINUX_PATH = "/home/upload";
 
-    public static final String FFMPEG_WINDOWS = "F:\\下载\\ffmpeg-20180314-f706cdd-win64-static\\bin\\ffmpeg";
+    private static final String FFMPEG_WINDOWS = "F:\\下载\\ffmpeg-20180314-f706cdd-win64-static\\bin\\ffmpeg";
 
     public static final String PHOTO = "/photo";
 

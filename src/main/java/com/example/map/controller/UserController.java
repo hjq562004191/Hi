@@ -29,6 +29,9 @@ import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+/**
+ * @author Qiang
+ */
 @RestController
 public class UserController {
 

@@ -3,10 +3,14 @@ package com.example.map.domain;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
-public class ChangePassword {
+/**
+ * @author Qiang
+ */
+public class ChangePassword implements Serializable {
 
-    String account;
+    private String account;
 
     @NotBlank(message = "密码不能为空")
     @Length(min = 6, max = 16, message = "密码长度必须在6到16个之间")
@@ -46,12 +50,4 @@ public class ChangePassword {
         this.sedpassword = sedpassword;
     }
 
-    @Override
-    public String toString() {
-        return "ChangePassword{" +
-                "account='" + account + '\'' +
-                ", password='" + password + '\'' +
-                ", sedpassword='" + sedpassword + '\'' +
-                '}';
-    }
 }

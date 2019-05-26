@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * @author: hjq
+ * @author: Qiang
  * Create by 18-4-11
  */
 public class ErroUtils {

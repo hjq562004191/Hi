@@ -58,7 +58,10 @@ public class ClickServiceImpl implements ClickService {
         if (clickMapper.saveClick(clickModel) == 0) {
             return false;   // 存储点赞
         }
-        // 更新information那张表 或者更新remark那张表
+
+        /**
+         *更新information那张表 或者更新remark那张表
+         */
         if (clickModel.getType() == 1) {
             InformationModel informationModel =
                     informationMapper.findById(clickModel.getInfoOrRemark());

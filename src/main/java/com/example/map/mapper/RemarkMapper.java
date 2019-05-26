@@ -18,11 +18,11 @@ public interface RemarkMapper {
             @Result(column = "content", property = "content"),
             @Result(column = "create_at", property = "createAt"),
             @Result(column = "create_by", property = "createBy",
-                one=@One(select = "com.map.mapper.UserMapper.findUserModelById")),
+                one=@One(select = "com.example.map.mapper.UserMapper.findUserModelById")),
             @Result(column = "id", property = "replays",
-                many = @Many(select = "com.map.mapper.ReplayMapper.selectReplayByCommId")),
+                many = @Many(select = "com.example.map.mapper.ReplayMapper.selectReplayByCommId")),
             @Result(column = "id", property = "totalReplay",
-                one = @One(select = "com.map.mapper.ReplayMapper.selectReplayCountByCommId")),
+                one = @One(select = "com.example.map.mapper.ReplayMapper.selectReplayCountByCommId")),
             @Result(column = "click_count", property = "clickCount")
     })
     List<RemarkModel> getRemarks(int infoId);

@@ -1,27 +1,41 @@
 package com.example.map.model;
 
-import java.util.Date;
 
 /**
  * 回复
+ * @author Qiang
  */
 public class ReplayModel {
+    /**
+     * 回复的id
+      */
 
-    private Integer id; // 回复的id
+    private Integer id;
+    /**
+     *评论的id
+     */
+    private Integer commId;
+    /**
+     *回复的用户
+     */
+    private UserModel fromUser;
+    /**
+     *目标用户
+     */
+    private UserModel toUser;
+    /**
+     *评论的内容
+     */
+    private String content;
 
-    private Integer commId; // 评论的id
-
-    private UserModel fromUser; // 回复的用户
-
-    private UserModel toUser; // 目标用户
-
-    private String content;    // 评论的内容
-
-    private Date createAt;
+    private String  createAt;
 
     private boolean isClick;
 
-    private Integer click;      // 点赞数
+    /**
+     *点赞数
+     */
+    private Integer click;
 
     public Integer getId() {
         return id;
@@ -35,11 +49,11 @@ public class ReplayModel {
         return commId;
     }
 
-    public Date getCreateAt() {
+    public String getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(Date createAt) {
+    public void setCreateAt(String createAt) {
         this.createAt = createAt;
     }
 

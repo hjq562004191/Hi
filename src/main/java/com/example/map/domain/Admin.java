@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 /**
  * 管理员
+ * @author Qiang
  */
 public class Admin implements Serializable {
 

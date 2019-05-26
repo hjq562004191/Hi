@@ -6,6 +6,9 @@ import com.example.map.model.ResultModel;
 import com.github.pagehelper.PageInfo;
 
 
+/**
+ * @author Qiang
+ */
 public interface UserService {
     ResultModel register(User user, String code);
 

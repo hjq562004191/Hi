@@ -59,12 +59,11 @@ public class InformationServiceImpl implements InformationService {
     public ResultModel getMessages(Integer userId, int pointId, int type) {
 
         List<InformationModel> informations = informationMapper.findInformation(pointId, type);
-        if (type == PHOTO || type == AUDIO || type == VIDEO) {
+
+        if (informations.size() != 0) {
             for (InformationModel informationModel : informations) {
                 handlerInformation(informationModel, type);
             }
-        }
-        if (informations.size() != 0) {
             if (userId != null) {
                 informationService.checkClick(informations, userId, 1);
             }
@@ -201,20 +200,26 @@ public class InformationServiceImpl implements InformationService {
 
     private void handlerInformation(InformationModel informationModel, Integer type) {
         String content = (String) informationModel.getContent();
+        int userId = informationModel.getUserId();
+        informationModel.setUsername(userMapper.findUsernameById(userId));
         ObjectMapper objectMapper = new ObjectMapper();
-        AudioMessage audioMessage = null;
-        ImageMessage imageMessage = null;
-        VideoMessage videoMessage = null;
+        CommMessage commMessage;
+        AudioMessage audioMessage ;
+        ImageMessage imageMessage ;
+        VideoMessage videoMessage ;
         try {
             if (type == AUDIO) {
                 audioMessage = objectMapper.readValue(content, AudioMessage.class);
                 informationModel.setContent(audioMessage);
-            }if (type == VIDEO){
+            }else if (type == VIDEO){
                 videoMessage = objectMapper.readValue(content, VideoMessage.class);
                 informationModel.setContent(videoMessage);
-            }else{
+            }else if (type == PHOTO){
                 imageMessage = objectMapper.readValue(content, ImageMessage.class);
                 informationModel.setContent(imageMessage);
+            }else {
+                commMessage = objectMapper.readValue(content, CommMessage.class);
+                informationModel.setContent(commMessage);
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,37 +1,21 @@
 package com.example.map.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
+/**
+ * @author Qiang
+ */
 public class InformationModel implements Serializable{
     private int id;
     private int pointId;
     private int type;
     private int userId;
-    private int audioSecond;
-    private int audioMinutes;
     private String username;
     private Object content;
     private int remarkCount;
     private int clickCount;
-    private Date createAt;
+    private String createAt;
     private boolean isClick;
-
-    public int getAudioSecond() {
-        return audioSecond;
-    }
-
-    public void setAudioSecond(int audioSecond) {
-        this.audioSecond = audioSecond;
-    }
-
-    public int getAudioMinutes() {
-        return audioMinutes;
-    }
-
-    public void setAudioMinutes(int audioMinutes) {
-        this.audioMinutes = audioMinutes;
-    }
 
     public InformationModel() {
     }
@@ -84,11 +68,11 @@ public class InformationModel implements Serializable{
         this.content = content;
     }
 
-    public Date getCreateAt() {
+    public String getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(Date createAt) {
+    public void setCreateAt(String createAt) {
         this.createAt = createAt;
     }
 

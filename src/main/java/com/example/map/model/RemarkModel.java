@@ -1,13 +1,12 @@
 package com.example.map.model;
 
-import java.util.Date;
 import java.util.List;
 
 public class RemarkModel {
 
     private int id;
     private String content;
-    private Date createAt;
+    private String createAt;
     private UserModel createBy;
     private Integer totalReplay;
     private int clickCount;
@@ -34,11 +33,11 @@ public class RemarkModel {
         this.content = content;
     }
 
-    public Date getCreateAt() {
+    public String getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(Date createAt) {
+    public void setCreateAt(String createAt) {
         this.createAt = createAt;
     }
 

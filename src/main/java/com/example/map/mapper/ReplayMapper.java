@@ -24,9 +24,9 @@ public interface ReplayMapper {
             @Result(id = true, column = "id", property = "id"),
             @Result(column = "comm_id", property = "commId"),
             @Result(column = "from_id", property = "fromUser",
-                one = @One(select = "com.map.mapper.UserMapper.findUserModelById")),
+                one = @One(select = "com.example.map.mapper.UserMapper.findUserModelById")),
             @Result(column = "to_id", property = "toUser",
-                one = @One(select = "com.map.mapper.UserMapper.findUserModelById")),
+                one = @One(select = "com.example.map.mapper.UserMapper.findUserModelById")),
             @Result(column = "content", property = "content"),
             @Result(column = "create_at", property = "createAt"),
             @Result(column = "click", property = "click")

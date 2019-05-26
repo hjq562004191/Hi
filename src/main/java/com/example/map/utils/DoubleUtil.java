@@ -2,7 +2,10 @@ package com.example.map.utils;
 
 import java.math.BigDecimal;
 
-//小数点进位
+/**
+ * @author Qiang
+ * 小数点进位
+ */
 public class DoubleUtil {
     public static double accuracy(double a, int x) {
         BigDecimal bigDecimal = new BigDecimal(a);
