@@ -1,7 +1,6 @@
 package com.example.map.service;
 
 import com.example.map.domain.Information;
-import com.example.map.model.ImageMessage;
 import com.example.map.model.InformationModel;
 import com.example.map.model.ResultModel;
 import org.springframework.transaction.annotation.Transactional;

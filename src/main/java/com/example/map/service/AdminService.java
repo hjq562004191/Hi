@@ -4,13 +4,18 @@ package com.example.map.service;
 import com.example.map.domain.Admin;
 import com.example.map.model.ResultModel;
 
-import java.util.Map;
-
+/**
+ * @author Qiang
+ */
 public interface AdminService {
 
-    ResultModel register(Admin admin);
+    ResultModel register(Admin admin, String code);
 
     ResultModel login(Admin admin);
 
-    String login(Admin admin, Map<String, String> errors);
+    ResultModel updata(String username,String password,int id);
+
+    ResultModel lockedUser(int userId);
+
+    ResultModel unLockUser(int userId);
 }

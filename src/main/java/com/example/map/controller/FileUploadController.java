@@ -4,9 +4,9 @@ package com.example.map.controller;
 import com.example.map.model.*;
 import com.example.map.service.FileUploadService;
 import com.example.map.service.InformationService;
-import com.example.map.service.UserService;
 import com.example.map.utils.FileUtil;
 import com.example.map.utils.QiniuCloudUtil;
+import com.example.map.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
@@ -21,9 +21,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-import static com.example.map.utils.FileUtil.getMultiPartSuffix;
-import static com.example.map.utils.FileUtil.getParentPath;
-import static com.example.map.utils.FileUtil.getRandomFileName;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @SuppressWarnings("all")
@@ -52,10 +49,10 @@ public class FileUploadController {
      */
     @RequestMapping(value = "/uploadAudio/{pointId}", method = POST)
     public ResultModel AudioUpload(@PathVariable int pointId,
-                                  @RequestParam("file") MultipartFile file,
+                                   @RequestParam("file") MultipartFile file,
                                    @RequestParam("second") int second,
                                    @RequestParam("minutes") int minutes,
-                                  HttpServletRequest request) throws JsonProcessingException {
+                                   HttpServletRequest request) throws JsonProcessingException {
 
         // 得到userId;
         Integer userId = (Integer) request.getAttribute("id");
@@ -65,11 +62,11 @@ public class FileUploadController {
         }
 
         // 获取文件上传的路径
-        String parentPath = getParentPath();
+        String parentPath = FileUtil.getParentPath();
         // 得到文件名
-        String fileRandomName = getRandomFileName();
+        String fileRandomName = FileUtil.getRandomFileName();
 
-        String suffix = getMultiPartSuffix(file);
+        String suffix = FileUtil.getMultiPartSuffix(file);
 
         String path;
         path = "/audio/" + fileRandomName + suffix;
@@ -130,11 +127,11 @@ public class FileUploadController {
         }
 
         // 获取文件上传的路径
-        String parentPath = getParentPath();
+        String parentPath = FileUtil.getParentPath();
         // 得到文件名
-        String fileRandomName = getRandomFileName();
+        String fileRandomName = FileUtil.getRandomFileName();
 
-        String suffix = getMultiPartSuffix(file);
+        String suffix = FileUtil.getMultiPartSuffix(file);
 
         String path;
         path = "/video/" + fileRandomName + suffix;
@@ -179,7 +176,7 @@ public class FileUploadController {
             }
         }
         String[] paths = new String[photos.size()];
-        String parentPath = getParentPath();
+        String parentPath = FileUtil.getParentPath();
 
         File parentFile = new File(parentPath, "/photo");
         if (!parentFile.exists()) {
@@ -189,7 +186,7 @@ public class FileUploadController {
 
         for (MultipartFile file : photos) {
 
-            String fileRandomName = getRandomFileName();
+            String fileRandomName = FileUtil.getRandomFileName();
             String suffix = FileUtil.getMultiPartSuffix(file);
             paths[count] = "/photo/" + fileRandomName + suffix;
             File realfile = new File(parentFile,fileRandomName+suffix);

@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 @Component
-public class TokenAppConfigurer extends WebMvcConfigurationSupport {
+public class InterceptorAppConfigurer extends WebMvcConfigurationSupport {
     @Autowired
     private TokenInterceptor tokenInterceptor;
     @Autowired

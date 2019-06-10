@@ -5,6 +5,9 @@ import com.example.map.model.RemarkModel;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+/**
+ * @author Qiang
+ */
 @Mapper
 public interface RemarkMapper {
     @Insert("insert into remark(info_id, content, create_at, create_by, " +

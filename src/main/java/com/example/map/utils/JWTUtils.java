@@ -36,9 +36,12 @@ public class JWTUtils {
                 .withClaim("id", id)
                 .withClaim("username", username)
                 .withClaim("type", type)
-                .withExpiresAt(experiesDate) // 设置过期的日期
-                .withIssuedAt(iatDate) // 签发时间
-                .sign(Algorithm.HMAC256(SECRET)); // 加密
+                // 设置过期的日期
+                .withExpiresAt(experiesDate)
+                // 签发时间
+                .withIssuedAt(iatDate)
+                // 加密
+                .sign(Algorithm.HMAC256(SECRET));
         return token;
     }
 

@@ -30,7 +30,5 @@ public interface UserService {
 
     ResultModel deleteUser(int userId);
 
-    ResultModel lockedUser(int userId);
 
-    ResultModel unLockUser(int userId);
 }

@@ -9,7 +9,6 @@ import com.example.map.model.InformationModel;
 import com.example.map.model.ResultBuilder;
 import com.example.map.model.ResultModel;
 import com.example.map.service.ClickService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

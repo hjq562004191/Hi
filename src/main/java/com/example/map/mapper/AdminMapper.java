@@ -12,24 +12,35 @@ import java.util.List;
 @Mapper
 public interface AdminMapper {
 
-    @Select("SELECT * FROM admin WHERE id = #{id}")
-    Admin getAdminById(String id);
+    @Select("SELECT * FROM map_admin WHERE id = #{id}")
+    Admin getAdminById(int id);
 
-    @Select("SELECT * FROM admin WHERE username = #{username}")
-    Admin getAdminByUsername(String username);
+    @Select("SELECT * FROM map_admin WHERE account = #{account}")
+    Admin getAdminByAccount(String account);
 
-    @Select("SELECT * FROM admin")
+    @Select("SELECT * FROM map_admin")
     List<Admin> getAllAdmin();
 
-    @Delete("DELETE FROM admin WHERE id = #{id}")
-    boolean deleteAdmin(String id);
+    @Delete("DELETE FROM map_admin WHERE id = #{id}")
+    boolean deleteAdmin(int id);
 
-    @Update("UPDATE FROM admin set username = {username}, password = #{password} WHERE id = #{id}")
-    boolean updateAdmin(String id);
+    @Update("UPDATE FROM map_admin set username = {username}, password = #{password} WHERE id = #{id}")
+    boolean updateAdmin(@Param("id") int id,@Param("username") String username,
+                        @Param("password") String password);
 
-    @Insert("INSERT INTO admin(username, password) VALUES(#{username}, #{password})")
+    @Insert("INSERT INTO map_admin(username, password) VALUES(#{username}, #{password})")
     boolean addAdmin(Admin admin);
 
-    @Select("SELECT username FROM admin WHERE username = #{username}")
-    String isExist(String username);
+    @Select("SELECT username FROM map_admin WHERE username = #{username}")
+    String isExistUsername(String username);
+
+    @Select("SELECT account FROM map_admin WHERE account = #{account}")
+    String isExistAccount(String account);
+
+    @Update("UPDATE map_user set isLock = 1 WHERE id = #{userId}")
+    boolean lockUser(int userId);
+
+    @Update("UPDATE map_user set isLock = 0 WHERE id = #{userId}")
+    boolean unLockUser(int userId);
+
 }

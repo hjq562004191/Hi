@@ -5,6 +5,9 @@ import com.example.map.model.ReplayModel;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+/**
+ * @author Qiang
+ */
 @Mapper
 public interface ReplayMapper {
 

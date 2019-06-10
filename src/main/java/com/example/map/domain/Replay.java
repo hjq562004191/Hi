@@ -4,6 +4,7 @@ import java.util.Date;
 
 /**
  * 回复
+ * @author Qiang
  */
 public class Replay {
 

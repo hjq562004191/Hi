@@ -1,17 +1,14 @@
 package com.example.map.controller;
 
 import com.auth0.jwt.interfaces.Claim;
-import com.example.map.View.DetialView;
-import com.example.map.View.SimpleView;
 import com.example.map.domain.ChangePassword;
 import com.example.map.domain.User;
 import com.example.map.model.ResultBuilder;
+import com.example.map.utils.JWTUtils;
+import com.example.map.View.SimpleView;
 import com.example.map.model.ResultModel;
 import com.example.map.service.UserService;
-import com.example.map.utils.JWTUtils;
-import com.example.map.utils.PhoneUtil;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -38,27 +35,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-
-    @RequestMapping(value = "/user/getphonecode", method = POST)
-    public ResultModel getphonecode(String phonenumber) {
-        String code = null;
-        code = PhoneUtil.getVerificationCode(phonenumber);
-        if (code == null){
-            return ResultBuilder.getFailure(-1, "验证码发送失败!");
-        }
-        return ResultBuilder.getSuccess(code,"获取成功!");
-    }
-
-
-    @RequestMapping(value = "/user/judgephone" , method = POST)
-    public  ResultModel phoneNumberJudge(String code,String phonenumber){
-        if (PhoneUtil.judgeCodeIsTrue(code,phonenumber)){
-            return ResultBuilder.getSuccess("验证成功!");
-        }
-        return ResultBuilder.getFailure(-1,"验证失败!");
-    }
-
-    @RequestMapping(value = "/changepassword" , method = POST)
+    @RequestMapping(value = "user/changepassword" , method = POST)
     public ResultModel changepassbyphone( String account, @Valid ChangePassword newpass){
         if (newpass.getPassword().equals(newpass.getSedpassword())){
             newpass.setAccount(account);
@@ -93,30 +70,6 @@ public class UserController {
     public ResultModel getUserMessageById(HttpServletRequest request) {
         Integer userId = (Integer) request.getAttribute("id");
         return userService.getUserMessageById(userId);
-    }
-
-    @GetMapping("/admin/users")
-    @JsonView(DetialView.class)
-    public ResultModel getUsers(int pageNo, int pageSize) {
-
-        PageInfo<User> list = userService.getUsers(pageNo, pageSize);
-        List<User> users = list.getList();
-        System.out.println(list);
-        if (!users.isEmpty()) {
-            return ResultBuilder.getSuccess(users);
-        } else {
-            return ResultBuilder.getFailure(1, "该范围内没有用户");
-        }
-    }
-
-    @RequestMapping(value = "/admin/userlock/{userId:\\d+00}")
-    public ResultModel lockUser(@PathVariable int userId) {
-        return userService.lockedUser(userId);
-    }
-
-    @RequestMapping(value = "/admin/userunlock/{userId:\\d+}")
-    public ResultModel unLockUser(@PathVariable int userId) {
-        return userService.unLockUser(userId);
     }
 
     @PostMapping(value = "/user")

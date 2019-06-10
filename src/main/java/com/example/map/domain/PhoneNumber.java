@@ -1,5 +1,8 @@
 package com.example.map.domain;
 
+/**
+ * @author Qiang
+ */
 public class PhoneNumber {
     private String mobilePhoneNumber;
     private String template;

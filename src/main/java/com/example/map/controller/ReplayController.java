@@ -1,6 +1,7 @@
 package com.example.map.controller;
 
 import com.example.map.domain.Replay;
+import com.example.map.mapper.UserMapper;
 import com.example.map.model.ReplayModel;
 import com.example.map.model.ResultBuilder;
 import com.example.map.model.ResultModel;
@@ -11,20 +12,30 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author Qiang
+ */
 @RestController
 public class ReplayController {
+
+    @Resource
+    private UserMapper userMapper;
 
     @Autowired
     private ReplayService replayService;
 
     @PostMapping("/replay/{commId}")
-    public ResultModel addReplay(@PathVariable Integer commId, Replay replay,
+    public ResultModel addReplay(@PathVariable Integer commId, Integer toId,String content,
                                  HttpServletRequest request) {
         Integer userId = (Integer) request.getAttribute("id");
+        Replay replay = new Replay();
+        replay.setContent(content);
+        replay.setToId(toId);
         replay.setFromId(userId);
         replay.setCommId(commId);
         replay.setCreateAt(new Date());

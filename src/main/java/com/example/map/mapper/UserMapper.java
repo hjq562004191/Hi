@@ -37,18 +37,15 @@ public interface UserMapper {
     @Select("SELECT * FROM map_user")
     List<User> getUsers();
 
+    @Select("select image from map_user where id = #{userid}")
+    String getimageById(int userid);
+
     @Update("UPDATE FROM map_user SET username = #{username}, " +
             "password = #{password} WHERE id = #{id}")
     User updateUser(User user);
 
     @Delete("DELETE FROM map_user WHERE id = #{id}")
     boolean deleteUser(int id);
-
-    @Update("UPDATE map_user set isLock = 1 WHERE id = #{userId}")
-    boolean lockUser(int userId);
-
-    @Update("UPDATE map_user set isLock = 0 WHERE id = #{userId}")
-    boolean unLockUser(int userId);
 
     @Update("UPDATE map_user set image=#{image} WHERE id = #{userId}")
     boolean updateImage(@Param("userId") int userId, @Param("image") String image);

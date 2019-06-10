@@ -35,7 +35,7 @@ public class Information implements Serializable {
     public Information() {
     }
 
-    public Information(int pointId, int userId, int type, String content,
+    public Information(int pointId, int userId, int type, Object content,
                        int remarkCount, int clickCount, Date createAt) {
         this.type = type;
         this.pointId = pointId;

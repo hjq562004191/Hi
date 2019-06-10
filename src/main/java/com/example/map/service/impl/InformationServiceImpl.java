@@ -3,7 +3,9 @@ package com.example.map.service.impl;
 import com.example.map.domain.Information;
 import com.example.map.mapper.*;
 import com.example.map.model.*;
+
 import com.example.map.service.InformationService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,6 +47,14 @@ public class InformationServiceImpl implements InformationService {
         // 判断需要添加的点是否存在
         if (!pointMapper.isExistPoint(pointId)) {
             ResultBuilder.getFailure(2, "点不存在");
+        }
+        CommMessage commMessage = new CommMessage();
+        commMessage.setComm(content);
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            content = objectMapper.writeValueAsString(commMessage);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
         }
         Information information = new Information(pointId, userId, 0, content, 0, 0, new Date());
 

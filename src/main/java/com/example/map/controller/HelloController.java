@@ -4,13 +4,14 @@ import com.example.map.domain.User;
 import com.example.map.mapper.UserMapper;
 import com.example.map.model.ResultBuilder;
 import com.example.map.model.ResultModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+
 @RestController
 public class HelloController {
-    @Autowired
+    @Resource
     UserMapper userMapper;
 
     @RequestMapping("/none/hello")

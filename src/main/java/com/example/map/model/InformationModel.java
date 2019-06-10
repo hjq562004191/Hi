@@ -11,6 +11,7 @@ public class InformationModel implements Serializable{
     private int type;
     private int userId;
     private String username;
+    private String image;
     private Object content;
     private int remarkCount;
     private int clickCount;
@@ -18,6 +19,14 @@ public class InformationModel implements Serializable{
     private boolean isClick;
 
     public InformationModel() {
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public int getUserId() {

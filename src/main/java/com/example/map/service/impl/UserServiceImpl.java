@@ -21,8 +21,12 @@ import java.util.List;
 /**
  * @author Qiang
  */
+
 @Service
 public class UserServiceImpl implements UserService {
+
+    private static final String image = "http://image.haojianqiang.top/94964900-b67c-4818-8f56-e150c01b8de1?imageView2/1/w/200/h/200/q/75|imageslim";
+
     Logger logger = Logger.getLogger(UserServiceImpl.class);
     @Resource
     UserMapper userMapper;
@@ -36,6 +40,7 @@ public class UserServiceImpl implements UserService {
             user.setType("user");
             try {
                 if (PhoneUtil.judgeCodeIsTrue(code,user.getAccount())) {
+                    user.setImage(image);
                     userMapper.saveUser(user);
                 }else {
                     return ResultBuilder.getFailure(3, "手机验证码错误");
@@ -151,28 +156,5 @@ public class UserServiceImpl implements UserService {
         return ResultBuilder.getSuccess("用户删除成功");
     }
 
-    @Override
-    public ResultModel lockedUser(int userId) {
-        if (userMapper.findUserById(userId) == null) {
-            return ResultBuilder.getFailure(1, "用户不存在");
-        }
-        boolean isLock = userMapper.lockUser(userId);
-        if (isLock) {
-            return ResultBuilder.getSuccess("锁定用户成功");
-        }
-        return ResultBuilder.getFailure(2, "锁定用户失败");
-    }
-
-    @Override
-    public ResultModel unLockUser(int userId) {
-        if (userMapper.findUserById(userId) == null) {
-            return ResultBuilder.getFailure(1, "用户不存在");
-        }
-        boolean isUnLock = userMapper.unLockUser(userId);
-        if (isUnLock) {
-            return ResultBuilder.getSuccess("用户解锁成功");
-        }
-        return ResultBuilder.getFailure(2, "用户解锁失败");
-    }
 
 }
