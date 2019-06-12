@@ -96,7 +96,7 @@ public class QiniuCloudUtil {
 
 
     // 普通删除(暂未使用以下方法，未测试)
-    public void delete(String key) throws IOException {
+    public void delete(String key) throws IOException  {
         // 实例化一个BucketManager对象
         BucketManager bucketManager = new BucketManager(auth);
         // 此处的33是去掉：http://ongsua0j7.bkt.clouddn.com/,剩下的key就是图片在七牛云的名称
