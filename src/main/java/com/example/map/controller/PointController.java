@@ -52,7 +52,8 @@ public class PointController {
     }
 
     @RequestMapping("/none/getPoints")
-    public ResultModel getPoints(double longitude, double latitude, int range) {
+    public ResultModel getPoints(Double longitude, Double latitude, Integer range) {
+
         return pointService.getPoints(longitude, latitude, range);
     }
 

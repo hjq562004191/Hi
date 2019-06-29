@@ -188,12 +188,27 @@ public class FileUploadController {
 
             String fileRandomName = FileUtil.getRandomFileName();
             String suffix = FileUtil.getMultiPartSuffix(file);
-            paths[count] = "/photo/" + fileRandomName + suffix;
-            File realfile = new File(parentFile,fileRandomName+suffix);
+//            paths[count] = "/photo/" + fileRandomName + suffix;
+//            File realfile = new File(parentFile,fileRandomName+suffix);
+//            try {
+//                file.transferTo(realfile);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            count++;
             try {
-                file.transferTo(realfile);
+                byte[] bytes = file.getBytes();
+                String imageName = "/photo/" + fileRandomName + suffix;;
+
+                QiniuCloudUtil qiniuUtil = new QiniuCloudUtil();
+                try {
+                    //使用base64方式上传到七牛云
+                    paths[count] = qiniuUtil.put64image(bytes, imageName);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             } catch (IOException e) {
-                e.printStackTrace();
+                return ResultBuilder.getFailure(-1,"上传发生异常！");
             }
             count++;
         }

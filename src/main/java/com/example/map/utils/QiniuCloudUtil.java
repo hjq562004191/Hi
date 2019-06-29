@@ -91,7 +91,11 @@ public class QiniuCloudUtil {
         System.out.println(response);
         //如果不需要添加图片样式，使用以下方式
         //return DOMAIN + key;
-        return DOMAIN + key + "?" + style;//   图片格式+ "?" + style
+        if (key.contains("/photo/")){
+            return DOMAIN + key;
+        }else {
+            return DOMAIN + key + "?" + style;//   图片格式+ "?" + style
+        }
     }
 
 
