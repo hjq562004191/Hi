@@ -3,9 +3,11 @@ package com.example.map.service;
 import com.example.map.model.ResultModel;
 
 public interface PointService {
-    ResultModel addPoint(String name, double longitude, double latitude, int id);
+    ResultModel addPoint(String name, double longitude, double latitude,String geohash, int id);
 
-    ResultModel getPoints(double longitude, double latitude, int range);
+//    ResultModel getPoints(Double longitude, Double latitude, Integer range);
+
+    ResultModel getPoints(String geohash,Integer geolen);
 
     ResultModel getItems(int pointId);
 

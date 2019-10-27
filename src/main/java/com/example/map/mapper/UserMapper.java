@@ -15,8 +15,8 @@ public interface UserMapper {
     @Select("select password from map_user where account = #{account}")
     String findPasswordByAccount(String account);
 
-    @Insert("insert into map_user(username, account, password, type) values(#{username}, #{account}," +
-            "#{password}, #{type})")
+    @Insert("insert into map_user(username, account, password, type, image) values(#{username}, #{account}," +
+            "#{password}, #{type}, #{image})")
     @Options(keyProperty = "id", useGeneratedKeys = true)
     int saveUser(User user);
     @Select("select * from map_user where account = #{account}")

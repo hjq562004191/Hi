@@ -169,7 +169,6 @@ public class GeoHashDemo {
     /**
      * @param base32
      * @return
-     * @Author:lulei
      * @Description: 将五位二进制转化为base32
      */
     private char getBase32Char(boolean[] base32) {
@@ -189,7 +188,6 @@ public class GeoHashDemo {
     /**
      * @param i
      * @return
-     * @Author:lulei
      * @Description: 将数字转化为二进制字符串
      */
     private String getBase32BinaryString(int i) {
@@ -255,7 +253,6 @@ public class GeoHashDemo {
      * @param min
      * @param max
      * @return
-     * @Author:lulei
      * @Description: 返回二进制对应的中间值
      */
     private double getGeoHashMid(String binaryStr, double min, double max) {
@@ -273,7 +270,6 @@ public class GeoHashDemo {
      * @param lat
      * @param lng
      * @return
-     * @Author:lulei
      * @Description: 获取坐标的geo二进制字符串
      */
     private boolean[] getGeoBinary(double lat, double lng) {
@@ -286,7 +282,6 @@ public class GeoHashDemo {
      * @param latArray
      * @param lngArray
      * @return
-     * @Author:lulei
      * @Description: 合并经纬度二进制
      */
     private boolean[] merge(boolean[] latArray, boolean[] lngArray) {
@@ -367,6 +362,8 @@ public class GeoHashDemo {
         System.out.println(JsonUtil.objectToJson(bean));
         System.out.println(new GeoHashDemo(bean.getLat(), bean.getLng()).getGeoHashBase32());
 //        System.out.println(DistanceUtil.getDistance(bean.getLat(), bean.getLng(), bean.getLat() - g.minLat, bean.getLng() - g.minLng));
+        StringBuilder sb = new StringBuilder(geoHash);
+        System.out.println(sb.substring(0,7) + "%");
     }
 
 }

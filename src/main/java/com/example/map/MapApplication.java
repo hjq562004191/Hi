@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @MapperScan("com.example.map.mapper")
 public class MapApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(MapApplication.class, args);
     }

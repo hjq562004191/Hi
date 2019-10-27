@@ -20,10 +20,12 @@ public class Point implements Serializable {
     @Range(max = 360, min = 0, message = "经度应该在0到360度之间")
     private double latitude;
 
+    private String geohash;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createAt;
-    private int createBy;
 
+    private int createBy;
 
     public Point() {
     }
@@ -58,6 +60,14 @@ public class Point implements Serializable {
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public String getGeohash() {
+        return geohash;
+    }
+
+    public void setGeohash(String geohash) {
+        this.geohash = geohash;
     }
 
     public Date getCreateAt() {

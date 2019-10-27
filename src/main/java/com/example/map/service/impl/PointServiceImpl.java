@@ -30,12 +30,13 @@ public class PointServiceImpl implements PointService {
     ItemsMapper itemsMapper;
 
     @Override
-    public ResultModel addPoint(String name, double longitude, double latitude, int id) {
+    public ResultModel addPoint(String name, double longitude, double latitude, String geohash ,int id) {
         if (pointMapper.findPointByLongitudeAndLatitude(longitude, latitude) == null) {
             Point point = new Point();
             point.setName(name);
             point.setLongitude(longitude);
             point.setLatitude(latitude);
+            point.setGeohash(geohash);
             point.setCreateAt(new Date());
             point.setCreateBy(id);
             if (pointMapper.savePoint(point) != 0) {
@@ -60,17 +61,33 @@ public class PointServiceImpl implements PointService {
         }
     }
 
+//    @Override
+//    public ResultModel getPoints(Double longitude, Double latitude, Integer range) {
+//        double dlon = MapUtil.dlon(range, latitude);
+//        double dlat = MapUtil.dlat(range, longitude);
+//        System.out.println(dlat + " " + dlon);
+//        double x1 = longitude + dlon;
+//        double x2 = longitude - dlon;
+//        double y1 = latitude + dlat;
+//        double y2 = latitude - dlat;
+//        List<Point> points = pointMapper.findPoints(x1, x2, y1, y2);
+//        List<PointAndItems> pointAndItems = new ArrayList();
+//        for (Point point : points) {
+//            ItemsModel itemsModel = itemsMapper.findItemsByPointId(point.getId());
+//            pointAndItems.add(new PointAndItems(point, itemsModel));
+//        }
+//        if (points.size() == 0) {
+//            return ResultBuilder.getFailure(1, "无点");
+//        } else {
+//            return ResultBuilder.getSuccess(pointAndItems);
+//        }
+//    }
+
     @Override
-    public ResultModel getPoints(double longitude, double latitude, int range) {
-        double dlon = MapUtil.dlon(range, latitude);
-        double dlat = MapUtil.dlat(range, longitude);
-        System.out.println(dlat + " " + dlon);
-        double x1 = longitude + dlon;
-        double x2 = longitude - dlon;
-        double y1 = latitude + dlat;
-        double y2 = latitude - dlat;
-        List<Point> points = pointMapper.findPoints(x1, x2, y1, y2);
-        List<PointAndItems> pointAndItems = new ArrayList<PointAndItems>();
+    public ResultModel getPoints(String geohash,Integer geolen) {
+        StringBuilder sb = new StringBuilder(geohash);
+        List<Point> points = pointMapper.findPoints(sb.substring(0,geolen) + "%");
+        List<PointAndItems> pointAndItems = new ArrayList();
         for (Point point : points) {
             ItemsModel itemsModel = itemsMapper.findItemsByPointId(point.getId());
             pointAndItems.add(new PointAndItems(point, itemsModel));

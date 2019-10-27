@@ -4,6 +4,7 @@ import com.auth0.jwt.interfaces.Claim;
 import com.example.map.model.ResultModel;
 import com.example.map.service.PointService;
 import com.example.map.utils.DoubleUtil;
+import com.example.map.utils.GeoHash;
 import com.example.map.utils.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,13 +49,24 @@ public class PointController {
         int id = map.get("id").asInt();
         longitude = DoubleUtil.accuracy(longitude, 5);
         latitude = DoubleUtil.accuracy(latitude, 5);
-        return pointService.addPoint(name, longitude, latitude, id);
+        GeoHash GH = new GeoHash(latitude,longitude);
+        String geohash = GH.getGeoHashBase32();
+        return pointService.addPoint(name, longitude, latitude, geohash ,id);
     }
 
     @RequestMapping("/none/getPoints")
     public ResultModel getPoints(Double longitude, Double latitude, Integer range) {
-
-        return pointService.getPoints(longitude, latitude, range);
+        Integer geolen = null;
+        if (range < 20){  // 七位代表误差在19米左右
+            geolen = 7;
+        }else if (range < 80){   //  误差76米
+            geolen = 6;
+        }else if (range < 610){   //误差610米
+            geolen = 5;
+        }else if (range < 2400){  // 误差2400米
+            geolen = 4;
+        }
+        return pointService.getPoints(new GeoHash(latitude,longitude).getGeoHashBase32(),geolen);
     }
 
     @RequestMapping("/none/getItems/{pointId}")

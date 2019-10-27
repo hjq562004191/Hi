@@ -46,7 +46,6 @@ public class GeoHash {
 
     /**
      * @return
-     * @Author:lulei
      * @Description: 求所在坐标点及周围点组成的九个
      */
     public List<String> getGeoHashBase32For9() {
@@ -100,7 +99,6 @@ public class GeoHash {
     /**
      * @param length
      * @return
-     * @Author:lulei
      * @Description: 设置经纬度转化为geohash长度
      */
     public boolean sethashLength(int length) {
@@ -120,7 +118,6 @@ public class GeoHash {
 
     /**
      * @return
-     * @Author:lulei
      * @Description: 获取经纬度的base32字符串
      */
     public String getGeoHashBase32() {
@@ -131,7 +128,6 @@ public class GeoHash {
      * @param lat
      * @param lng
      * @return
-     * @Author:lulei
      * @Description: 获取经纬度的base32字符串
      */
     private String getGeoHashBase32(double lat, double lng) {
@@ -157,7 +153,6 @@ public class GeoHash {
     /**
      * @param base32
      * @return
-     * @Author:lulei
      * @Description: 将五位二进制转化为base32
      */
     private char getBase32Char(boolean[] base32) {
@@ -178,7 +173,6 @@ public class GeoHash {
      * @param lat
      * @param lng
      * @return
-     * @Author:lulei
      * @Description: 获取坐标的geo二进制字符串
      */
     private boolean[] getGeoBinary(double lat, double lng) {
@@ -191,7 +185,6 @@ public class GeoHash {
      * @param latArray
      * @param lngArray
      * @return
-     * @Author:lulei
      * @Description: 合并经纬度二进制
      */
     private boolean[] merge(boolean[] latArray, boolean[] lngArray) {
@@ -214,7 +207,6 @@ public class GeoHash {
      * @param min
      * @param max
      * @return
-     * @Author:lulei
      * @Description: 将数字转化为geohash二进制字符串
      */
     private boolean[] getHashArray(double value, double min, double max, int length) {

@@ -2,8 +2,10 @@ package com.example.map.mapper;
 
 import com.example.map.domain.Point;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.type.JdbcType;
 
 import java.util.List;
+
 @Mapper
 public interface PointMapper {
 
@@ -20,17 +22,20 @@ public interface PointMapper {
     Point findPointByLongitudeAndLatitude(@Param("longitude") double longitude,
                                           @Param("latitude") double latitude);
 
-    @Insert("insert into map_point(name, longitude, latitude, create_at, create_by) " +
-            "values(#{name}, #{longitude}, #{latitude}, #{createAt}, #{createBy})")
+    @Insert("insert into map_point(name, longitude, latitude, geohash,create_at, create_by) " +
+            "values(#{name}, #{longitude}, #{latitude},#{geohash}, #{createAt}, #{createBy})")
     int savePoint(Point point);
 
-    @Select("select * from map_point where longitude < #{x1} and longitude > #{x2} " +
-            "and latitude < #{y1} and latitude > #{y2} AND isLock = 0")
-    @ResultMap("pointMap")
-    List<Point> findPoints(@Param("x1") double x1,
-                           @Param("x2") double x2,
-                           @Param("y1") double y1,
-                           @Param("y2") double y2);
+//    @Select("select * from map_point where longitude < #{x1} and longitude > #{x2} " +
+//            "and latitude < #{y1} and latitude > #{y2} AND isLock = 0")
+//    @ResultMap("pointMap")
+//    List<Point> findPoints(@Param("x1") double x1,
+//                           @Param("x2") double x2,
+//                           @Param("y1") double y1,
+//                           @Param("y2") double y2);
+
+    @Select("select * from map_point where geohash LIKE #{geohash} AND isLock = 0")
+    List<Point> findPoints(@Param("geohash") String geohash);
 
     @Select("select * from map_point where longitude = #{longitude} and latitude = #{latitude} " +
             "AND isLock = 0")
@@ -38,9 +43,9 @@ public interface PointMapper {
     Point findPointByXY(@Param("longitude") double longitude,
                         @Param("latitude") double latitude);
 
-    @Select("select * from map_point where id = #{id} AND isLock = 0")
+    @Select("select count(*) from map_point where geohash LIKE #{geohash} AND isLock = 0")
     @ResultMap("pointMap")
-    Point findPointById(int id);
+    int findPointByGeohash(String geohash);
 
     @Select("SELECT COUNT(*) FROM map_point WHERE id = #{pointId}")
     boolean isExistPoint(int pointId);
