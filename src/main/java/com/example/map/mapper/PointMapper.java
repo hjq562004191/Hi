@@ -16,13 +16,13 @@ public interface PointMapper {
             @Result(column = "name", property = "name"),
             @Result(column = "longitude", property = "longitude"),
             @Result(column = "latitude", property = "latitude"),
-            @Result(column = "create_at", property = "createAt"),
+            @Result(column = "create_at", property = "createAt" ),
             @Result(column = "create_by", property = "createBy")
     })
     Point findPointByLongitudeAndLatitude(@Param("longitude") double longitude,
                                           @Param("latitude") double latitude);
 
-    @Insert("insert into map_point(name, longitude, latitude, geohash,create_at, create_by) " +
+    @Insert("insert into map_point(name, longitude, latitude, geohash ,create_at, create_by) " +
             "values(#{name}, #{longitude}, #{latitude},#{geohash}, #{createAt}, #{createBy})")
     int savePoint(Point point);
 
@@ -35,6 +35,7 @@ public interface PointMapper {
 //                           @Param("y2") double y2);
 
     @Select("select * from map_point where geohash LIKE #{geohash} AND isLock = 0")
+    @ResultMap("pointMap")
     List<Point> findPoints(@Param("geohash") String geohash);
 
     @Select("select * from map_point where longitude = #{longitude} and latitude = #{latitude} " +

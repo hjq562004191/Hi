@@ -9,6 +9,7 @@ import com.example.map.model.PointAndItems;
 import com.example.map.model.ResultBuilder;
 import com.example.map.model.ResultModel;
 import com.example.map.service.PointService;
+import com.example.map.utils.GeoHash;
 import com.example.map.utils.MapUtil;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,8 @@ public class PointServiceImpl implements PointService {
 
     @Override
     public ResultModel addPoint(String name, double longitude, double latitude, String geohash ,int id) {
-        if (pointMapper.findPointByLongitudeAndLatitude(longitude, latitude) == null) {
+        StringBuilder stringBuilder = new StringBuilder(geohash);
+        if (pointMapper.findPoints(stringBuilder.substring(0,7)+ "%").size() == 0) {
             Point point = new Point();
             point.setName(name);
             point.setLongitude(longitude);
@@ -88,13 +90,14 @@ public class PointServiceImpl implements PointService {
         StringBuilder sb = new StringBuilder(geohash);
         List<Point> points = pointMapper.findPoints(sb.substring(0,geolen) + "%");
         List<PointAndItems> pointAndItems = new ArrayList();
-        for (Point point : points) {
-            ItemsModel itemsModel = itemsMapper.findItemsByPointId(point.getId());
-            pointAndItems.add(new PointAndItems(point, itemsModel));
-        }
+
         if (points.size() == 0) {
             return ResultBuilder.getFailure(1, "无点");
         } else {
+            for (Point point : points) {
+                ItemsModel itemsModel = itemsMapper.findItemsByPointId(point.getId());
+                pointAndItems.add(new PointAndItems(point, itemsModel));
+            }
             return ResultBuilder.getSuccess(pointAndItems);
         }
     }

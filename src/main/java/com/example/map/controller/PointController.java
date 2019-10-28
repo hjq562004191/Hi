@@ -57,13 +57,13 @@ public class PointController {
     @RequestMapping("/none/getPoints")
     public ResultModel getPoints(Double longitude, Double latitude, Integer range) {
         Integer geolen = null;
-        if (range < 20){  // 七位代表误差在19米左右
+        if (range < 20){  // 七位代表范围在19米左右
             geolen = 7;
-        }else if (range < 80){   //  误差76米
+        }else if (range < 80){   //  范围76米
             geolen = 6;
-        }else if (range < 610){   //误差610米
+        }else if (range < 610){   // 范围610米
             geolen = 5;
-        }else if (range < 2400){  // 误差2400米
+        }else if (range < 2400){  // 范围2400米
             geolen = 4;
         }
         return pointService.getPoints(new GeoHash(latitude,longitude).getGeoHashBase32(),geolen);
@@ -83,6 +83,4 @@ public class PointController {
     public ResultModel unLockPoint(@PathVariable int pointId) {
         return pointService.unLockPoint(pointId);
     }
-
-
 }

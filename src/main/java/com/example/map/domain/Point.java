@@ -94,6 +94,7 @@ public class Point implements Serializable {
                 ", name='" + name + '\'' +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
+                ", geohash=" + geohash +
                 ", createAt=" + createAt +
                 ", createBy=" + createBy +
                 '}';

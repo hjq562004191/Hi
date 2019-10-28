@@ -1,6 +1,7 @@
 package com.example.map.model;
 
 import com.example.map.domain.Point;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
@@ -9,6 +10,7 @@ public class PointAndItems {
     private String name;
     private double longitude;
     private double latitude;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createAt;
     private int createBy;
     private int mesCount;
@@ -107,5 +109,21 @@ public class PointAndItems {
 
     public void setVidCount(int vidCount) {
         this.vidCount = vidCount;
+    }
+
+    @Override
+    public String toString() {
+        return "PointAndItems{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
+                ", createAt='" + createAt + '\'' +
+                ", createBy=" + createBy +
+                ", mesCount=" + mesCount +
+                ", phoCount=" + phoCount +
+                ", audCount=" + audCount +
+                ", vidCount=" + vidCount +
+                '}';
     }
 }
