@@ -35,6 +35,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
+
     @RequestMapping(value = "user/changepassword" , method = POST)
     public ResultModel changepassbyphone( String account, @Valid ChangePassword newpass){
         if (newpass.getPassword().equals(newpass.getSedpassword())){

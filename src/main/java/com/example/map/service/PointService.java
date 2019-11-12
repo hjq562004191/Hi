@@ -1,5 +1,6 @@
 package com.example.map.service;
 
+import com.example.map.domain.Point;
 import com.example.map.model.ResultModel;
 
 public interface PointService {
@@ -14,4 +15,6 @@ public interface PointService {
     ResultModel lockPoint(int pointId);
 
     ResultModel unLockPoint(int pointId);
+
+    Point getPointById(int pointId);
 }

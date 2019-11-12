@@ -16,6 +16,8 @@ public interface UserService {
 
     ResultModel getUserMessageById(int userId);
 
+    String getUserIconById(int userId);
+
     ResultModel saveIcon(int userId, String path);
 
     User findUserById(int userId);

@@ -94,6 +94,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public String getUserIconById(int userId) {
+        return userMapper.getimageById(userId);
+    }
+
+    @Override
     public ResultModel saveIcon(int userId, String path) {
         User user = userMapper.findUserById(userId);
         user.setImage(path);

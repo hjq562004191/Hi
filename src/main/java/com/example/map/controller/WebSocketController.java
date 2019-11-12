@@ -23,7 +23,6 @@ public class WebSocketController {
     private static CopyOnWriteArraySet<WebSocketController> webSocketSet = new CopyOnWriteArraySet<WebSocketController>();
 
     public static void main(String[] args) {
-        String sb = "考试真的烦啊啊啊啊啊啊啊啊啊啊啊啊！！！！";
         Map map = new HashMap();
         HashSet set = new HashSet();
         int a = 1;

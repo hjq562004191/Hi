@@ -145,4 +145,9 @@ public class PointServiceImpl implements PointService {
         }
         return ResultBuilder.getFailure(3, "该点解锁失败");
     }
+
+    @Override
+    public Point getPointById(int pointId) {
+        return pointMapper.findPointById(pointId);
+    }
 }

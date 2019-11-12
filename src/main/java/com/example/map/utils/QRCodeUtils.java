@@ -1,5 +1,7 @@
-package com.example.map;
+package com.example.map.utils;
 
+import com.example.map.model.ResultBuilder;
+import com.example.map.model.ResultModel;
 import com.google.zxing.*;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.client.j2se.MatrixToImageConfig;
@@ -17,21 +19,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class QRcode {
-    public static void main(String[] args) {
-        try {
-            QREncode("张硕");
-            QRReader(new File("D:\\test.png"));
-        } catch (WriterException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+/**
+ * 扫码分享点
+ */
+public class QRCodeUtils {
+    public static ResultModel QREncode(String content, String logoUrl) throws WriterException, IOException {
 
-    public static void  QREncode(String content) throws WriterException, IOException {
         int width = 200;
         int height = 200;
         String format = "png";
@@ -49,9 +42,18 @@ public class QRcode {
         MatrixToImageConfig matrixToImageConfig = new MatrixToImageConfig(0xFF000001, 0xFFFFFFFF);
 
         BufferedImage bufferedImage = LogoMatrix(MatrixToImageWriter.toBufferedImage(bitMatrix,matrixToImageConfig)
-                ,new File("D:\\logo.jpg"));
-        ImageIO.write(bufferedImage, format, new File("D:\\test." + format));//输出带logo图片
+                ,FileUtil.getFileByUrl(logoUrl,format));
+
+        String QRname = FileUtil.getRandomFileName() + "." + format;
+        if (!new File(FileUtil.getParentPath() + "/QRcode/").exists()){
+            new File(FileUtil.getParentPath() + "/QRcode/").mkdir();
+        }
+        String path = FileUtil.getParentPath() +"/QRcode/" +QRname;
+
+        ImageIO.write(bufferedImage, format, new File(path));//输出带logo图片
         System.out.println("输出成功.");
+        System.out.println(path);
+        return ResultBuilder.getSuccess(path);
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.example.map.mapper;
 
 import com.example.map.domain.Point;
+import com.example.map.model.ResultModel;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 
@@ -59,4 +60,7 @@ public interface PointMapper {
 
     @Select("SELECT isLock FROM map_point WHERE id = #{pointId}")
     int isLockedPoint(int pointId);
+
+    @Select("select * from map_point where id = #{id} AND isLock = 0")
+    Point findPointById(int id);
 }

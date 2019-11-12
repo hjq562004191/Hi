@@ -2,6 +2,9 @@ package com.example.map.utils;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -33,13 +36,14 @@ public class FileUtil {
         String str = simpleDateFormat.format(date);
 
         Random random = new Random();
-        int name = (int)(random.nextDouble() * 90000 + 10000);
+        int name = (int) (random.nextDouble() * 90000 + 10000);
 
         return str + name;
     }
 
     /**
      * 判断环境获得路径
+     *
      * @return
      */
     public static String getParentPath() {
@@ -63,4 +67,59 @@ public class FileUtil {
         return FFMPEG_WINDOWS;
     }
 
+    public static File getFileByUrl(String fileUrl, String suffix) {
+
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+
+        BufferedOutputStream stream = null;
+
+        InputStream inputStream = null;
+
+        File file = null;
+
+        try {
+
+            URL imageUrl = new URL(fileUrl);
+
+            HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+
+            conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
+
+            inputStream = conn.getInputStream();
+
+            byte[] buffer = new byte[1024];
+
+            int len = 0;
+
+            while ((len = inputStream.read(buffer)) != -1) {
+
+                outStream.write(buffer, 0, len);
+
+            }
+
+            file = File.createTempFile("pattern", "." + suffix);
+
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+
+            stream = new BufferedOutputStream(fileOutputStream);
+
+            stream.write(outStream.toByteArray());
+
+        } catch (Exception e) {
+
+        } finally {
+
+            try {
+
+                if (inputStream != null) inputStream.close();
+
+                if (stream != null) stream.close();
+
+                outStream.close();
+
+            } catch (Exception e) {
+            }
+        }
+        return file;
+    }
 }
